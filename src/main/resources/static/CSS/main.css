@@ -1,0 +1,9 @@
+.myfont{
+font-family: 'Roboto Mono', monospace;
+}
+.myshadow {
+	box-shadow: 2px 2px black;
+}
+.reg {
+	width: 800px;
+}
