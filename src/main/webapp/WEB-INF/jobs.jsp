@@ -39,13 +39,11 @@
 					</thead>
 					<tbody>
 						<c:forEach var="job" items="${myJobs}">
-							<c:forEach var="users" items="${job.users}">
 									<tr>
-										<td><c:out value="${job.name}"/></td>
+										<td><a href="/thefamilyplanner/jobs/${job.id}"><c:out value="${job.name}"/></a></td>
 										<td><c:out value="${job.date}"/></td>
-										<td><a href="#">edit</a></td>
+										<td><a href="/thefamilyplanner/jobs/${job.id}/edit">edit</a></td>
 									</tr>
-							</c:forEach>
 						</c:forEach>
 					</tbody>
 				</Table>
@@ -63,7 +61,7 @@
 					<tbody>
 						<c:forEach var="job" items="${avalibleJobs}">
 							<tr>
-								<td><c:out value="${job.name}"/></td>
+								<td><a href="/thefamilyplanner/jobs/${job.id}"><c:out value="${job.name}"/></a></td>
 								<td><c:out value="${job.date}"/></td>
 								<td>
 									<c:forEach var="users" items="${job.users}">

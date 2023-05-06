@@ -26,7 +26,12 @@
 		<div class="p-5">
 			<div class="d-flex align-items-center border-bottom border-dark">
 				<h1 class="me-5">Welcome, <c:out value="${user.firstName}"/></h1>
-				<a class="ms-5" href="/logout">logout</a>
+				<a href="/thefamilyplanner">Home</a>
+			</div>
+			<div class="mt-3">
+				<h4>Job:</h4><p><c:out value="${job.name}"/></p>
+				<h4>Description:</h4><p><c:out value="${job.description}"/></p>
+				<h4>Date:</h4><p><c:out value="${job.date}"/></p>
 			</div>
 		</div>
 	</div>

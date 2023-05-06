@@ -61,11 +61,11 @@ public class UserService {
 		return userRepo.findByJobsNotContains(job);
 	}
 	
-	public List<User> getAssignedUsers(Event event){
+	public List<User> getAssignedUsersEvent(Event event){
 		return userRepo.findAllByEvents(event);
 	}
 	
-	public List<User> getUnassignedUsers(Event event){
+	public List<User> getUnassignedUsersEvent(Event event){
 		return userRepo.findByEventsNotContains(event);
 	}
 	
