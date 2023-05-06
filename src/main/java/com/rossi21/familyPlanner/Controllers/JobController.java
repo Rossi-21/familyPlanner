@@ -31,10 +31,15 @@ public class JobController {
     	if (session.getAttribute("userId") == null) {
     		return "redirect:/";
     	}
-    	List<Job> jobs = jobServ.allJobs();
-    	model.addAttribute("jobs", jobs);
+    	
     	Long userId = (Long)session.getAttribute("userId");
     	model.addAttribute("user", userServ.getOneById(userId));
+    	User user = userServ.getOneById(userId);
+    	model.addAttribute("user", user);
+    	List<Job> myJob = jobServ.getAssignedJobs(user);
+    	model.addAttribute("myJobs", myJob);
+		List<Job> jobs = jobServ.getUnassignedJobs(user);
+    	model.addAttribute("avalibleJobs", jobs);
     	
     	return "jobs.jsp";
     }

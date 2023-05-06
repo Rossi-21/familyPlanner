@@ -29,7 +29,7 @@
 				<a href="/thefamilyplanner">Home</a>
 			</div>
 			<div>
-				<Table class="table table-bordered table-hover">
+				<Table class="table table-bordered table-hover mt-3">
 					<thead>
 						<tr>
 							<th>Job</th>
@@ -38,10 +38,18 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="job" items="${jobs}">
+						<c:forEach var="job" items="${myJobs}">
+							<c:forEach var="users" items="${job.users}">
+									<tr>
+										<td><c:out value="${job.name}"/></td>
+										<td><c:out value="${job.date}"/></td>
+										<td><a href="#">edit</a></td>
+									</tr>
+							</c:forEach>
 						</c:forEach>
 					</tbody>
 				</Table>
+			</div>
 			<div>
 				<h3>All Jobs:</h3>
 				<Table class="table table-bordered table-hover">
@@ -53,16 +61,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="job" items="${jobs}">
+						<c:forEach var="job" items="${avalibleJobs}">
 							<tr>
 								<td><c:out value="${job.name}"/></td>
 								<td><c:out value="${job.date}"/></td>
 								<td>
-									<c:forEach var="user" items="${job.users}">
-	                    				<c:out value="${user.firstName}"/> <!-- or whatever property you want to display -->
-	                				</c:forEach>
-                				</td>
+									<c:forEach var="users" items="${job.users}">
+										<c:out value="${users.firstName}"/>
+									</c:forEach>
+								</td>
 							</tr>
+							
 						</c:forEach>
 					</tbody>
 				</Table>
@@ -71,6 +80,6 @@
 			<a href="/thefamilyplanner/jobs/new"><button class="btn btn-outline-dark btn-lg me-3 mt-3 rounded-0 myshadow">Create a Job</button></a>
 			</div>
 		</div>
-	</div>			
+	</div>		
 </body>
 </html>
