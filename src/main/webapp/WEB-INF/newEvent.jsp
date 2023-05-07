@@ -25,16 +25,21 @@
 	<div class="container-fluid">
 	<div class="p-5">
 		<div class="d-flex align-items-center justify-content-between border-bottom border-dark">
-			<h1>Create a Job!</h1>
+			<h1>Create an Event!</h1>
 		</div>
 		<div class="mt-3 width">	
-			<form:form action="/jobs/create" method="post" modelAttribute="job">
+			<form:form action="/events/create" method="post" modelAttribute="event">
 					<form:errors path="user" class="error"/>
 					<form:input type="hidden" path="user" value="${user.id}" class="form-control"/>
 				<div>
 					<form:label class="fw-bold mt-2 form-label" path='name'>Name:</form:label>
 					<form:errors class="text-danger" path="name"/>
 		   			<form:input class="form-control" path='name'/>
+				</div>
+				<div>
+					<form:label class="fw-bold mt-2 form-label" path='location'>Location:</form:label>
+					<form:errors class="text-danger" path="location"/>
+		   			<form:input class="form-control" path='location'/>
 				</div>
 				<div>
 					<form:label class="fw-bold mt-2 form-label" path='description'>Description:</form:label>
@@ -53,7 +58,7 @@
   						<form:label path="users"><c:out value="${user.firstName}"/></form:label>
 					</c:forEach>
 				</div>
-				<a href="/thefamilyplanner/jobs"><button class="mt-3 btn btn-outline-dark me-3 rounded-0 myshadow">Cancel</button></a>
+				<a href="/thefamilyplanner/events"><button class="mt-3 btn btn-outline-dark me-3 rounded-0 myshadow">Cancel</button></a>
 		   		<input class="mt-3 btn btn-outline-dark me-3 rounded-0 myshadow" type="submit" value="Create"/>	
    			</form:form>
 		</div>	

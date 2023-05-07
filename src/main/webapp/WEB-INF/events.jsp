@@ -29,9 +29,55 @@
 				<a href="/thefamilyplanner">Home</a>
 			</div>
 			<div>
-			<h1>Hello</h1>
+				<Table class="table table-bordered table-hover mt-3">
+					<thead>
+						<tr>
+							<th>Event</th>
+							<th>Date</th>
+							<th>Action</th>	
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="event" items="${myEvents}">
+									<tr>
+										<td><a href="/thefamilyplanner/events/${event.id}"><c:out value="${event.name}"/></a></td>
+										<td><c:out value="${event.date}"/></td>
+										<td><a href="/thefamilyplanner/events/${event.id}/edit">edit</a></td> 
+									</tr>
+						</c:forEach>
+					</tbody>
+				</Table>
+			</div>
+			<div>
+				<h3>All Event:</h3>
+				<Table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Event</th>
+							<th>Date</th>
+							<th>Assigned to:</th>	
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="event" items="${avalibleEvents}">
+							<tr>
+								<td><a href="/thefamilyplanner/events/${event.id}"><c:out value="${event.name}"/></a></td>
+								<td><c:out value="${event.date}"/></td>
+								<td>
+									<c:forEach var="users" items="${event.users}">
+										<c:out value="${users.firstName}"/>
+									</c:forEach>
+								</td>
+							</tr>
+							
+						</c:forEach>
+					</tbody>
+				</Table>
+			</div>
+			<div>
+			<a href="/thefamilyplanner/events/new"><button class="btn btn-outline-dark btn-lg me-3 mt-3 rounded-0 myshadow">Create an Event</button></a>
 			</div>
 		</div>
-	</div>			
+	</div>		
 </body>
 </html>

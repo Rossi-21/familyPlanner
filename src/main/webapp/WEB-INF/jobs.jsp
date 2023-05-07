@@ -42,7 +42,7 @@
 									<tr>
 										<td><a href="/thefamilyplanner/jobs/${job.id}"><c:out value="${job.name}"/></a></td>
 										<td><c:out value="${job.date}"/></td>
-										<td><a href="/thefamilyplanner/jobs/${job.id}/edit">edit</a></td>
+										<td><a href="/thefamilyplanner/jobs/${job.id}/edit">edit</a></td> 
 									</tr>
 						</c:forEach>
 					</tbody>

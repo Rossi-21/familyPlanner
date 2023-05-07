@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -38,7 +39,7 @@ public class Event {
 	
 	@NotNull(message="Date is required!")
     @Future(message="Date must be in the future!")
-    @DateTimeFormat(pattern="MM-dd-yyy")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date date;
 	
 	@NotEmpty(message="Description is required!")
@@ -46,17 +47,17 @@ public class Event {
     private String description;
 	
 	@Column(updatable=false)
-    @DateTimeFormat(pattern="MM-dd-yyyy")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdAt;
-    @DateTimeFormat(pattern="MM-dd-yyyy")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
     
-    //@ManyToOne(fetch = FetchType.LAZY)
-   // @JoinColumn(name="user_id")
-    //private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="creator_id")
+    private User user;
     
     //@OneToMany(mappedBy="show", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-   // private List<Rating> ratings;
+    //private List<Rating> ratings;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -65,6 +66,7 @@ public class Event {
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> users;
+    
 	public Event() {}
     
     @PrePersist
@@ -76,4 +78,78 @@ public class Event {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+    
+    
 }

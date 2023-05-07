@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -58,8 +59,12 @@ public class User {
     private Date updatedAt;
    
     //enables our One to Many connection with the other class
-    //@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
-    //private List<Show> shows;
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    private List<Job> createdJobs;
+    
+    //enables our One to Many connection with the other class
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    private List<Event> createdEvents;
     
     // enables rating connection to projects
     //@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
@@ -180,7 +185,21 @@ public class User {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
-    
-	
+
+	public List<Job> getCreatedJobs() {
+		return createdJobs;
+	}
+
+	public void setCreatedJobs(List<Job> createdJobs) {
+		this.createdJobs = createdJobs;
+	}
+
+	public List<Event> getCreatedEvents() {
+		return createdEvents;
+	}
+
+	public void setCreatedEvents(List<Event> createdEvents) {
+		this.createdEvents = createdEvents;
+	}
     
 }

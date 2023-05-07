@@ -114,10 +114,10 @@ public class JobController {
         }
     }
 	
-	// Delete a project method
+	// Delete a job method
 	@DeleteMapping("/jobs/{id}")
     public String destroy(@PathVariable("id") Long id) {
 		jobServ.deleteJob(id);
-        return "redirect:/jobs";
+        return "redirect:/thefamilyplanner/jobs";
     }
 }

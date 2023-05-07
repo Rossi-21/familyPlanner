@@ -33,6 +33,14 @@
 				<h4>Description:</h4><p><c:out value="${job.description}"/></p>
 				<h4>Date:</h4><p><c:out value="${job.date}"/></p>
 			</div>
+			<div>
+				<c:if test="${user.id == job.user.id}">
+				<form action="/jobs/${job.id}" method="post">
+				    <input type="hidden" name="_method" value="delete">
+				    <input class="mt-3 btn btn-danger btn-outline-dark me-3 rounded-0 myshadow" type="submit" value="delete">
+				</form>
+			</c:if>
+			</div>
 		</div>
 	</div>
 </body>

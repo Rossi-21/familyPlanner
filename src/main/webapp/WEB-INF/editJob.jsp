@@ -31,6 +31,8 @@
 			<div>
 				<form:form class="width mt-3" action="/jobs/${job.id}" method="post" modelAttribute="job">
 					<input type="hidden" name="_method" value="put">
+					<form:errors path="user" class="error"/>
+					<form:input type="hidden" path="user" value="${user.id}" class="form-control"/>
 					<div>
 						<form:label class="form-label fw-bold mt-2" path='name'>Name:</form:label>
 						<form:errors class="text-danger" path="name"/>

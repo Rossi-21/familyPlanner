@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -48,9 +49,9 @@ public class Job {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
     
-    //@ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name="user_id")
-    //private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="creator_id")
+    private User user;
     
     //@OneToMany(mappedBy="show", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     // private List<Rating> ratings;
@@ -130,6 +131,16 @@ public class Job {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
     
     
 	
