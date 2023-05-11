@@ -18,64 +18,73 @@
     <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Acme&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
-<body class="myfont">
-	<div class="container-fluid d-flex mx-auto reg">
-		<div class="p-5">
-			<div class="d-flex align-items-center border-bottom border-dark">
-				<h1 class="me-5"><c:out value="${user.firstName}"/>'s Jobs</h1>
-				<a href="/thefamilyplanner">Home</a>
+<body class="myfont grade">
+	<div class="pt-5 container-fluid">
+		<div class="d-flex align-items-center justify-content-between border-bottom border-dark">
+			<h1 class="me-5 text-dark">Jobs @The Family Planner</h1>
+			<div class="dropdown">
+				<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<div class="icon"></div>
+					<div class="icon"></div>
+					<div class="icon"></div>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-light">
+					<li><a class="dropdown-item" href="/thefamilyplanner">Home</a></li>
+					<li><a class="dropdown-item" href="/thefamilyplanner/events">Events</a></li>
+					<li><a class="dropdown-item" href="/thefamilyplanner/jobs/new">Create a Job</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="/logout">Logout</a></li>
+				</ul>
 			</div>
-			<div>
-				<Table class="table table-bordered table-hover mt-3">
-					<thead>
-						<tr>
-							<th>Job</th>
-							<th>Date</th>
-							<th>Action</th>	
+		</div>
+		<div class="mt-4 mb-5" style="width:50%; margin-left:25%;">
+			<h3><c:out value="${user.firstName}"/>'s Jobs:</h3>
+			<Table class="table table-hover table-borderless mt-3">
+				<thead>
+					<tr class="text-light">				
+						<th>Name</th>
+						<th>Date</th>
+						<th>Action</th>	
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="job" items="${myJobs}">
+						<tr class="text-dark">
+							<td style="width: 50%;"><a href="/thefamilyplanner/jobs/${job.id}" class="text-dark"><c:out value="${job.name}"/></a></td>
+							<td style="width: 25%;"><fmt:formatDate value="${job.date}" pattern="MM/dd"/></td>
+							<td style="width: 20%;"><a href="/thefamilyplanner/jobs/${job.id}/edit" class="text-dark">edit</a></td> 
 						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="job" items="${myJobs}">
-							<tr>
-								<td><a href="/thefamilyplanner/jobs/${job.id}"><c:out value="${job.name}"/></a></td>
-								<td><fmt:formatDate value="${job.date}" pattern="MM/dd"/></td>
-								<td><a href="/thefamilyplanner/jobs/${job.id}/edit">edit</a></td> 
-							</tr>
-						</c:forEach>
-					</tbody>
-				</Table>
-			</div>
-			<div>
-				<h3>All Jobs:</h3>
-				<Table class="table table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>Job</th>
-							<th>Date</th>
-							<th>Assigned to:</th>	
+					</c:forEach>
+				</tbody>
+			</Table>
+		</div>
+		<div style="width:50%; margin-left:25%;">
+			<h3>All Jobs:</h3>
+			<Table class="table table-borderless table-hover">
+				<thead>
+					<tr class="text-light">
+						<th>Job</th>
+						<th>Date</th>
+						<th>Assigned to:</th>	
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="job" items="${avalibleJobs}">
+						<tr class="text-dark">
+							<td style="width: 50%;"><a href="/thefamilyplanner/jobs/${job.id}" class="text-dark"><c:out value="${job.name}"/></a></td>
+							<td style="width: 25%;"><fmt:formatDate value="${job.date}" pattern="MM/dd"/></td>
+							<td style="width: 20%;">
+								<c:forEach var="users" items="${job.users}">
+									<c:out value="${users.firstName}"/>
+								</c:forEach>
+							</td>
 						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="job" items="${avalibleJobs}">
-							<tr>
-								<td><a href="/thefamilyplanner/jobs/${job.id}"><c:out value="${job.name}"/></a></td>
-								<td><fmt:formatDate value="${job.date}" pattern="MM/dd"/></td>
-								<td>
-									<c:forEach var="users" items="${job.users}">
-										<c:out value="${users.firstName}"/>
-									</c:forEach>
-								</td>
-							</tr>
-							
-						</c:forEach>
-					</tbody>
-				</Table>
-			</div>
-			<div>
-			<a href="/thefamilyplanner/jobs/new"><button class="btn btn-outline-dark btn-lg me-3 mt-3 rounded-0 myshadow">Create a Job</button></a>
-			</div>
+						
+					</c:forEach>
+				</tbody>
+			</Table>
 		</div>
 	</div>		
 </body>

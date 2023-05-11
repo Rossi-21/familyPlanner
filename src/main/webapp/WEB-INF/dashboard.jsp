@@ -18,44 +18,43 @@
     <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Acme&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 <body class="myfont grade">
 	<div class="pt-5 container-fluid">
-		
-			<div class="d-flex align-items-center justify-content-between border-bottom border-dark">
-				<h1 class="me-5 text-light">Welcome to the Family Planner, <c:out value="${user.firstName}"/></h1>
-				<div class="dropdown">
-				  <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				    <div class="icon"></div>
+		<div class="d-flex align-items-center justify-content-between border-bottom border-dark">
+			<h1 class="me-5 text-dark">Welcome to the Family Planner, <c:out value="${user.firstName}"/></h1>
+			<div class="dropdown">
+				<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<div class="icon"></div>
 					<div class="icon"></div>
-				  </button>
-				  <ul class="dropdown-menu dropdown-menu-dark">
-				    <li><a class="dropdown-item" href="/thefamilyplanner/jobs">Jobs</a></li>
-				    <li><a class="dropdown-item" href="/thefamilyplanner/events">Events</a></li>
-				    <li><hr class="dropdown-divider"></li>
-				    <li><a class="dropdown-item" href="/logout">logout</a></li>
-				  </ul>
-				</div>
+					<div class="icon"></div>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-light">
+					<li><a class="dropdown-item" href="/thefamilyplanner/jobs">Jobs</a></li>
+					<li><a class="dropdown-item" href="/thefamilyplanner/events">Events</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="/logout">Logout</a></li>
+				</ul>
 			</div>
+		</div>
 			<div class="d-flex justify-content-evenly">
 				<c:forEach items="${forecast}" var="item">
-					<div class="align-items-center text-center mt-5">
-						<h4>${item.day.condition.text}</h4>
-						<h3>
+					<div class="border border-3 border-dark bg-light rounded-5 align-items-center text-center mt-5">
+						<h3 class="mt-2">
 			                <c:set var="dateFormat" value="MMM dd" />
 			                <fmt:parseDate var="parsedDate" value="${item.date}" pattern="yyyy-MM-dd" />
 			                <fmt:formatDate value="${parsedDate}" pattern="${dateFormat}" />
 			            </h3>
+			            <h4>${item.day.condition.text}</h4>
 						<img src="${item.day.condition.icon}" class="weather" alt="Weather Icon">
 						<div class="d-flex justify-content-center">
 							<p class="text-dark fw-bolder">High</p>
                     		<p class="text-dark fw-bold ms-4">Low</p>
 						</div>	
 						<div class="d-flex justify-content-center">
-							<p class="text-dark fw-bolder">${item.day.maxtemp_f}</p>
-                    		<p class="text-dark fw-bold ms-4">${item.day.mintemp_f}</p>
+							<p class="text-danger fs-5 fw-bolder">${item.day.maxtemp_f}</p>
+                    		<p class="text-primary fs-5 fw-bold ms-4">${item.day.mintemp_f}</p>
 						</div>	
 					</div>
 			</c:forEach>
