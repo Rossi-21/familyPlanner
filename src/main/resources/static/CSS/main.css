@@ -2,8 +2,28 @@
 font-family: 'Roboto Mono', monospace;
 }
 .myshadow {
-	box-shadow: 2px 2px black;
+	box-shadow: 2px 2px white;
 }
 .reg {
 	width: 800px;
 }
+.grade {
+	background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+}
+.weather {
+	height: 175px;
+}
+
+.btnGrade {
+	background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+}
+.icon{
+	width: 35px;
+	height: 5px;
+	background-color: black;
+	margin: 6px 0;
+}
+
+
+
+

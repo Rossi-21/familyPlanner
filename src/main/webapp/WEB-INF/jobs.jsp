@@ -13,10 +13,9 @@
 <head>
     <meta charset="UTF-8">
     <title>The Family Planner</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/app.js"></script><!-- change to match your file/naming structure -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -39,11 +38,11 @@
 					</thead>
 					<tbody>
 						<c:forEach var="job" items="${myJobs}">
-									<tr>
-										<td><a href="/thefamilyplanner/jobs/${job.id}"><c:out value="${job.name}"/></a></td>
-										<td><c:out value="${job.date}"/></td>
-										<td><a href="/thefamilyplanner/jobs/${job.id}/edit">edit</a></td> 
-									</tr>
+							<tr>
+								<td><a href="/thefamilyplanner/jobs/${job.id}"><c:out value="${job.name}"/></a></td>
+								<td><fmt:formatDate value="${job.date}" pattern="MM/dd"/></td>
+								<td><a href="/thefamilyplanner/jobs/${job.id}/edit">edit</a></td> 
+							</tr>
 						</c:forEach>
 					</tbody>
 				</Table>
@@ -62,7 +61,7 @@
 						<c:forEach var="job" items="${avalibleJobs}">
 							<tr>
 								<td><a href="/thefamilyplanner/jobs/${job.id}"><c:out value="${job.name}"/></a></td>
-								<td><c:out value="${job.date}"/></td>
+								<td><fmt:formatDate value="${job.date}" pattern="MM/dd"/></td>
 								<td>
 									<c:forEach var="users" items="${job.users}">
 										<c:out value="${users.firstName}"/>

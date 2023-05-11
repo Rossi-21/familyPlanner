@@ -1,5 +1,6 @@
 package com.rossi21.familyPlanner.Services;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,5 +56,17 @@ public class JobService {
 	
 	public List<Job> getUnassignedJobs(User user){
 		return jobRepo.findByUsersNotContains(user);
+	}
+	
+	public List<Job> getAssignedJobsSortedByDate(User user) {
+	    List<Job> assignedJobs = getAssignedJobs(user);
+	    assignedJobs.sort(Comparator.comparing(Job::getDate));
+	    return assignedJobs;
+	}
+	
+	public List<Job> getUnAssignedJobsSortedByDate(User user) {
+	    List<Job> unassignedJobs = getUnassignedJobs(user);
+	    unassignedJobs.sort(Comparator.comparing(Job::getDate));
+	    return unassignedJobs;
 	}
 }

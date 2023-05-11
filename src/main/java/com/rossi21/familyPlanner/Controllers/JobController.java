@@ -40,10 +40,15 @@ public class JobController {
     	model.addAttribute("user", userServ.getOneById(userId));
     	User user = userServ.getOneById(userId);
     	model.addAttribute("user", user);
-    	List<Job> myJob = jobServ.getAssignedJobs(user);
-    	model.addAttribute("myJobs", myJob);
-		List<Job> jobs = jobServ.getUnassignedJobs(user);
+    	//List<Job> myJob = jobServ.getAssignedJobs(user);
+    	
+		List<Job> jobs = jobServ.getUnAssignedJobsSortedByDate(user);
     	model.addAttribute("avalibleJobs", jobs);
+    	
+        List<Job> sortedJobs = jobServ.getAssignedJobsSortedByDate(user);
+        model.addAttribute("myJobs", sortedJobs);
+        
+      
     	
     	return "jobs.jsp";
     }
