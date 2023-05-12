@@ -60,13 +60,12 @@
 		<div class="border-bottom border-light mx-auto mt-4" style="width:80%;">
 			<h2> Comments...</h2>
 		</div>	
-			<div class="mx-auto mt-4" style="width:80%;">
-				<c:forEach var="comment" items="${comments}">
-					<c:if test="${comment.job.id == job.id}">
-						<p><c:out value="${comment.user.firstName}"/>: <c:out value="${comment.description}"/></p>
-					</c:if>
-				</c:forEach>
-			</div>
+		<div class="mx-auto mt-4" style="width:80%;">
+			<c:forEach var="comment" items="${comments}">
+				<c:if test="${comment.job.id == job.id}">
+					<p><c:out value="${comment.user.firstName}"/>: <c:out value="${comment.description}"/></p>
+				</c:if>
+			</c:forEach>
 		</div>
 	</div>
 </body>

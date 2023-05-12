@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.rossi21.familyPlanner.Models.CommentEvent;
 import com.rossi21.familyPlanner.Models.Event;
 import com.rossi21.familyPlanner.Models.User;
+import com.rossi21.familyPlanner.Services.CommentEventService;
 import com.rossi21.familyPlanner.Services.EventService;
 import com.rossi21.familyPlanner.Services.UserService;
 
@@ -29,6 +31,8 @@ public class EventController {
     private UserService userServ;
 	@Autowired
 	private EventService eventServ;
+	@Autowired
+	private CommentEventService comEventServ;
 	
 	//Event Home Page
 	@GetMapping("/thefamilyplanner/events")
@@ -86,6 +90,8 @@ public class EventController {
         model.addAttribute("event", event);
         Long userId = (Long)session.getAttribute("userId");
     	model.addAttribute("user", userServ.getOneById(userId));
+    	List<CommentEvent> commentEvents = comEventServ.allCommentEvents();
+        model.addAttribute("commentEvents", commentEvents);
     	
         return "showEvent.jsp";
     }
@@ -116,6 +122,33 @@ public class EventController {
             return "redirect:/thefamilyplanner/events";
         }
     }
+	
+	//Event Comment Page
+	@GetMapping("/thefamilyplanner/events/{id}/comment")
+    public String comment(@PathVariable("id") Long id, Model model, @ModelAttribute("commentEvent") CommentEvent commentEvent, HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+    		return "redirect:/";
+    	}
+		Event event = eventServ.getOneById(id);
+        model.addAttribute("event", event);
+        Long userId = (Long)session.getAttribute("userId");
+    	model.addAttribute("user", userServ.getOneById(userId));
+    	List<CommentEvent> commentEvents = comEventServ.allCommentEvents();
+        model.addAttribute("commentEvents", commentEvents);
+        
+        return "commentEvent.jsp";
+	}
+	
+	//Event Comment Method
+	@PostMapping("/events/comment")
+	public String createComment(@Valid @ModelAttribute("commentEvent") CommentEvent commentEvent, BindingResult result) {
+        if (result.hasErrors()) {
+            return "commentEvent.jsp";
+        } else {
+        	comEventServ.createCommentEvent(commentEvent);
+        	return String.format("redirect:/thefamilyplanner/events/%s/comment", Long.toString(commentEvent.getEvent().getId()) );
+        }	
+	}
 	
 	// Delete a job method
 	@DeleteMapping("/events/{id}")

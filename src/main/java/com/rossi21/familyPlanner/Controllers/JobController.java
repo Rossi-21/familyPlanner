@@ -122,6 +122,7 @@ public class JobController {
             return "redirect:/thefamilyplanner/jobs";
         }
     }
+	
 	//Job Comment Page
 	@GetMapping("/thefamilyplanner/jobs/{id}/comment")
     public String comment(@PathVariable("id") Long id, Model model, @ModelAttribute("comment") Comment comment, HttpSession session) {

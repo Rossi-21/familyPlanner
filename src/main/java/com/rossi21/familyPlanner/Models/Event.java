@@ -3,6 +3,7 @@ package com.rossi21.familyPlanner.Models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -56,8 +58,8 @@ public class Event {
     @JoinColumn(name="creator_id")
     private User user;
     
-    //@OneToMany(mappedBy="show", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    //private List<Rating> ratings;
+    @OneToMany(mappedBy="event", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CommentEvent> commentsEvent;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -150,6 +152,15 @@ public class Event {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+
+	public List<CommentEvent> getCommentsEvent() {
+		return commentsEvent;
+	}
+
+	public void setCommentsEvent(List<CommentEvent> commentsEvent) {
+		this.commentsEvent = commentsEvent;
+	}
     
+	
     
 }

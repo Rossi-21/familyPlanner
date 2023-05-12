@@ -11,6 +11,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <head>
     <meta charset="UTF-8">
     <title>The Family Planner</title>
@@ -22,9 +24,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Acme&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 <body class="myfont bg-dark text-light">
-	<div class="container-fluid pt-5">
+	<div class="pt-5 container-fluid">
 		<div class="d-flex align-items-center justify-content-between border-bottom border-light">
-			<h1 class="me-5">the Family Planner</h1>
+			<h1>Comment on <c:out value="${event.name}"/>!</h1>
 			<div class="dropdown">
 				<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<div class="icon"></div>
@@ -42,27 +44,23 @@
 				</ul>
 			</div>
 		</div>
-		<div>
-			<c:if test="${user.id == event.user.id}">
-				<form style="margin-left:83%;" action="/events/${event.id}" method="post">
-					<input type="hidden" name="_method" value="delete">
-					<input class="mt-3 btn btn-danger btn-outline-dark me-3 rounded-5 myshadow" type="submit" value="delete">
-				</form>
-			</c:if>
-		</div>
-		<div class="mt-4 border-light rounded myshadow mx-auto border text-center" style ="width:80%;">
-			<h4 class="mt-3">Event:</h4><p><c:out value="${event.name}"/></p>
-			<h4>Description:</h4><p><c:out value="${event.description}"/></p>
-			<h4>Location:</h4><p><c:out value="${event.location}"/></p>
-			<h4>Date:</h4><p><fmt:formatDate value="${event.date}" pattern="MM/dd"/></p>
-		</div>
-		<div class="mx-auto" style="width:80%;">
-			<a href="/thefamilyplanner/events/${event.id}/comment"><button class="mt-3 btn btn-primary btn-outline-light me-3 rounded-5 myshadow">Comment</button></a>
+		<div class="mt-4 p-4 border-light rounded myshadow mx-auto border" style ="width:80%;">
+			<form:form action="/events/comment" method="post" modelAttribute="commentEvent">
+				<form:errors path="user" class="error"/>
+				<form:input type="hidden" path="user" value="${user.id}" class="form-control"/>
+				<form:input type="hidden" path="event" value="${event.id}" class="form-control"/>
+				<div>
+					<form:label class="fw-bold mt-2 form-label" path='description'>Comment:</form:label>
+					<form:errors class="text-danger" path="description"/>
+					<form:textarea class="form-control" path="description" cols="20" rows="3"></form:textarea>    		
+				</div>	
+				<input class="mt-3 btn btn-outline-light text-primary fs-4 me-3 rounded-5 myshadow" type="submit" value=" + "/>
+			</form:form>
 		</div>
 		<div class="border-bottom border-light mx-auto mt-4" style="width:80%;">
 			<h2> Comments...</h2>
 		</div>	
-		<div class="mx-auto mt-4" style="width:80%;">
+			<div class="mx-auto mt-4" style="width:80%;">
 				<c:forEach var="comment" items="${commentEvents}">
 					<c:if test="${comment.event.id == event.id}">
 						<p><c:out value="${comment.user.firstName}"/>: <c:out value="${comment.description}"/></p>

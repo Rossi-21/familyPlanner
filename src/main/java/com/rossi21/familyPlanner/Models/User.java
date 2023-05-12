@@ -70,6 +70,10 @@ public class User {
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Comment> comments;
     
+    // enables comment connection to events
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    private List<CommentEvent> commentsEvent;
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "jobs_users", 
@@ -201,5 +205,23 @@ public class User {
 	public void setCreatedEvents(List<Event> createdEvents) {
 		this.createdEvents = createdEvents;
 	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<CommentEvent> getCommentsEvent() {
+		return commentsEvent;
+	}
+
+	public void setCommentsEvent(List<CommentEvent> commentsEvent) {
+		this.commentsEvent = commentsEvent;
+	}
+	
+	
     
 }
