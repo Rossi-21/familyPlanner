@@ -20,40 +20,54 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Acme&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
-<body class="myfont grade">
+<body class="myfont bg-dark text-light">
 	<div class="container-fluid pt-5">
-		<div class="d-flex align-items-center justify-content-between border-bottom border-dark">
-			<h1 class="me-5 text-dark">Welcome to the Family Planner, <c:out value="${user.firstName}"/></h1>
+		<div class="d-flex align-items-center justify-content-between border-bottom border-light">
+			<h1 class="me-5">the Family Planner</h1>
 			<div class="dropdown">
 				<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<div class="icon"></div>
 					<div class="icon"></div>
 					<div class="icon"></div>
 				</button>
-				<ul class="dropdown-menu dropdown-menu-light">
+				<ul class="dropdown-menu dropdown-menu-dark">
 					<li><a class="dropdown-item" href="/thefamilyplanner">Home</a></li>
 					<li><a class="dropdown-item" href="/thefamilyplanner/jobs">Jobs</a></li>
 					<li><a class="dropdown-item" href="/thefamilyplanner/events">Events</a></li>
 					<li><a class="dropdown-item" href="/thefamilyplanner/jobs/new">Create a Job</a></li>
+					<li><a class="dropdown-item" href="/thefamilyplanner/events/new">Create an Event</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/logout">Logout</a></li>
 				</ul>
 			</div>
 		</div>
+		<div>
+			<c:if test="${user.id == job.user.id}">
+			<form style="margin-left:83%;" action="/jobs/${job.id}" method="post">
+			    <input type="hidden" name="_method" value="delete">
+			    <input class="mt-3 btn btn-danger btn-outline-dark me-3 rounded-5 myshadow" type="submit" value="delete">
+			</form>
+		</c:if>
+		</div>
+		<div class="mt-4 border-light rounded myshadow mx-auto border text-center" style ="width:80%;">
+			<h4 class="mt-3">Job:</h4><p><c:out value="${job.name}"/></p>
+			<h4>Description:</h4><p><c:out value="${job.description}"/></p>
+			<h4>Date:</h4><p><fmt:formatDate value="${job.date}" pattern="MM/dd"/></p>
+		</div>
+		<div class="mx-auto" style="width:80%;">
+			<a href="/thefamilyplanner/jobs/${job.id}/comment"><button class="mt-3 btn btn-primary btn-outline-light me-3 rounded-5 myshadow">Comment</button></a>
+		</div>
+		<div class="border-bottom border-light mx-auto mt-4" style="width:80%;">
+			<h2> Comments...</h2>
+		</div>	
+			<div class="mx-auto mt-4" style="width:80%;">
+				<c:forEach var="comment" items="${comments}">
+					<c:if test="${comment.job.id == job.id}">
+						<p><c:out value="${comment.user.firstName}"/>: <c:out value="${comment.description}"/></p>
+					</c:if>
+				</c:forEach>
 			</div>
-			<div class="mt-3">
-				<h4>Job:</h4><p><c:out value="${job.name}"/></p>
-				<h4>Description:</h4><p><c:out value="${job.description}"/></p>
-				<h4>Date:</h4><p><c:out value="${job.date}"/></p>
-			</div>
-			<div>
-				<c:if test="${user.id == job.user.id}">
-				<form action="/jobs/${job.id}" method="post">
-				    <input type="hidden" name="_method" value="delete">
-				    <input class="mt-3 btn btn-danger btn-outline-dark me-3 rounded-0 myshadow" type="submit" value="delete">
-				</form>
-			</c:if>
-			</div>
+		</div>
 	</div>
 </body>
 </html>

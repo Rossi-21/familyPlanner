@@ -20,71 +20,74 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Acme&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
-<body class="myfont grade">
+<body class="myfont bg-dark text-light">
 	<div class="pt-5 container-fluid">
-		<div class="d-flex align-items-center justify-content-between border-bottom border-dark">
-			<h1 class="me-5 text-dark">Jobs @The Family Planner</h1>
+		<div class="d-flex align-items-center justify-content-between border-bottom border-light">
+			<h1 class="me-5">Jobs @the Family Planner</h1>
 			<div class="dropdown">
 				<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<div class="icon"></div>
 					<div class="icon"></div>
 					<div class="icon"></div>
 				</button>
-				<ul class="dropdown-menu dropdown-menu-light">
+				<ul class="dropdown-menu dropdown-menu-dark">
 					<li><a class="dropdown-item" href="/thefamilyplanner">Home</a></li>
 					<li><a class="dropdown-item" href="/thefamilyplanner/events">Events</a></li>
 					<li><a class="dropdown-item" href="/thefamilyplanner/jobs/new">Create a Job</a></li>
+					<li><a class="dropdown-item" href="/thefamilyplanner/events/new">Create an Event</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/logout">Logout</a></li>
 				</ul>
 			</div>
 		</div>
-		<div class="mt-4 mb-5" style="width:50%; margin-left:25%;">
-			<h3><c:out value="${user.firstName}"/>'s Jobs:</h3>
-			<Table class="table table-hover table-borderless mt-3">
-				<thead>
-					<tr class="text-light">				
-						<th>Name</th>
-						<th>Date</th>
-						<th>Action</th>	
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="job" items="${myJobs}">
-						<tr class="text-dark">
-							<td style="width: 50%;"><a href="/thefamilyplanner/jobs/${job.id}" class="text-dark"><c:out value="${job.name}"/></a></td>
-							<td style="width: 25%;"><fmt:formatDate value="${job.date}" pattern="MM/dd"/></td>
-							<td style="width: 20%;"><a href="/thefamilyplanner/jobs/${job.id}/edit" class="text-dark">edit</a></td> 
+		<div class="mt-4 border-light rounded myshadow mx-auto border" style ="width:80%;">
+			<div class="mt-4 mb-5" style="width:50%; margin-left:25%;">
+				<h3 class="text-decoration-underline"><c:out value="${user.firstName}"/>'s Jobs:</h3>
+				<Table class="table table-dark table-hover table-borderless mt-3">
+					<thead>
+						<tr class="text-light">				
+							<th>Name</th>
+							<th>Date</th>
+							<th>Action</th>	
 						</tr>
-					</c:forEach>
-				</tbody>
-			</Table>
-		</div>
-		<div style="width:50%; margin-left:25%;">
-			<h3>All Jobs:</h3>
-			<Table class="table table-borderless table-hover">
-				<thead>
-					<tr class="text-light">
-						<th>Job</th>
-						<th>Date</th>
-						<th>Assigned to:</th>	
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="job" items="${avalibleJobs}">
-						<tr class="text-dark">
-							<td style="width: 50%;"><a href="/thefamilyplanner/jobs/${job.id}" class="text-dark"><c:out value="${job.name}"/></a></td>
-							<td style="width: 25%;"><fmt:formatDate value="${job.date}" pattern="MM/dd"/></td>
-							<td style="width: 20%;">
-								<c:forEach var="users" items="${job.users}">
-									<c:out value="${users.firstName}"/>
-								</c:forEach>
-							</td>
+					</thead>
+					<tbody>
+						<c:forEach var="job" items="${myJobs}">
+							<tr class="text-light">
+								<td style="width: 50%;"><a href="/thefamilyplanner/jobs/${job.id}" class="text-light"><c:out value="${job.name}"/></a></td>
+								<td style="width: 25%;"><fmt:formatDate value="${job.date}" pattern="MM/dd"/></td>
+								<td style="width: 20%;"><a href="/thefamilyplanner/jobs/${job.id}/edit" class="text-light">edit</a></td> 
+							</tr>
+						</c:forEach>
+					</tbody>
+				</Table>
+			</div>
+			<div style="width:50%; margin-left:25%;">
+				<h3 class="text-decoration-underline">All Jobs:</h3>
+				<Table class="table table-dark table-borderless table-hover">
+					<thead>
+						<tr class="text-light">
+							<th>Job</th>
+							<th>Date</th>
+							<th>Assigned to:</th>	
 						</tr>
-						
-					</c:forEach>
-				</tbody>
-			</Table>
+					</thead>
+					<tbody>
+						<c:forEach var="job" items="${avalibleJobs}">
+							<tr class="text-light">
+								<td style="width: 50%;"><a href="/thefamilyplanner/jobs/${job.id}" class="text-light"><c:out value="${job.name}"/></a></td>
+								<td style="width: 25%;"><fmt:formatDate value="${job.date}" pattern="MM/dd"/></td>
+								<td style="width: 20%;">
+									<c:forEach var="users" items="${job.users}">
+										<c:out value="${users.firstName}"/>
+									</c:forEach>
+								</td>
+							</tr>
+							
+						</c:forEach>
+					</tbody>
+				</Table>
+			</div>
 		</div>
 	</div>		
 </body>

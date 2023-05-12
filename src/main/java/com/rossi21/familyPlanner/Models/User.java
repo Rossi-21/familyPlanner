@@ -66,9 +66,9 @@ public class User {
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Event> createdEvents;
     
-    // enables rating connection to projects
-    //@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
-    //private List<Rating> ratings;
+    // enables comment connection to jobs
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    private List<Comment> comments;
     
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

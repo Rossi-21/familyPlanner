@@ -2,25 +2,26 @@
 font-family: 'Acme', sans-serif;
 }
 .myshadow {
-	box-shadow: 2px 2px white;
+	box-shadow: 3px 4px #ced4da;
 }
 .reg {
 	width: 800px;
 }
 .grade {
-	background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+	background-color: #003049;
+	color: #eae2b7;
 }
 .weather {
 	height: 175px;
 }
 
-.btnGrade {
-	background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+.backGrade {
+	background-image: radial-gradient(circle, #e0e0e0, #d7d7d7, #cecece, #c5c5c5, #bcbcbc, #afafaf, #a2a2a2, #959595, #818181, #6d6d6d, #5a5a5a, #484848);;
 }
 .icon{
 	width: 35px;
 	height: 5px;
-	background-color: black;
+	background-color: white;
 	margin: 6px 0;
 }
 

@@ -21,10 +21,10 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Acme&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
-<body class="myfont grade">
+<body class="myfont bg-dark text-light">
 	<div class="container-fluid pt-4">
 		<div>
-		<div class="d-flex align-items-center border-bottom border-dark">
+		<div class="d-flex align-items-center border-bottom border-light">
 			<h1 class="me-5">the Family Planner</h1>
 		</div>
 		<div class="d-flex mt-3 justify-content-evenly" style="width:65%; margin:18%;">

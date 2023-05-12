@@ -30,7 +30,7 @@ public class EventController {
 	@Autowired
 	private EventService eventServ;
 	
-	//Event Page
+	//Event Home Page
 	@GetMapping("/thefamilyplanner/events")
     public String home(Model model, @ModelAttribute("event") Event event, HttpSession session) {
     	if (session.getAttribute("userId") == null) {
@@ -41,10 +41,12 @@ public class EventController {
     	model.addAttribute("user", userServ.getOneById(userId));
     	User user = userServ.getOneById(userId);
     	model.addAttribute("user", user);
-    	List<Event> myEvents = eventServ.getAssignedEvents(user);
-    	model.addAttribute("myEvents", myEvents);
-		List<Event> events = eventServ.getUnassignedEvents(user);
+    	
+    	List<Event> events = eventServ.getUnAssignedEventsSortedByDate(user);
     	model.addAttribute("avalibleEvents", events);
+    	
+        List<Event> sortedEvents = eventServ.getAssignedEventsSortedByDate(user);
+        model.addAttribute("myEvents", sortedEvents);
     	
     	return "events.jsp";
     }

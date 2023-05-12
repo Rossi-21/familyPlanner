@@ -50,20 +50,24 @@ public class JobService {
 		jobRepo.deleteById(id);
 	}
 	
+	//Get Jobs Assigned to User
 	public List<Job> getAssignedJobs(User user){
 		return jobRepo.findAllByUsers(user);
 	}
 	
+	//Get Jobs not Assigned to User
 	public List<Job> getUnassignedJobs(User user){
 		return jobRepo.findByUsersNotContains(user);
 	}
 	
+	//Get Jobs Assigned to User Sorted by Date
 	public List<Job> getAssignedJobsSortedByDate(User user) {
 	    List<Job> assignedJobs = getAssignedJobs(user);
 	    assignedJobs.sort(Comparator.comparing(Job::getDate));
 	    return assignedJobs;
 	}
 	
+	//Get Jobs Assigned to User Sorted by Date
 	public List<Job> getUnAssignedJobsSortedByDate(User user) {
 	    List<Job> unassignedJobs = getUnassignedJobs(user);
 	    unassignedJobs.sort(Comparator.comparing(Job::getDate));
