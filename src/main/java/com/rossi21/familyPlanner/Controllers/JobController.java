@@ -70,9 +70,11 @@ public class JobController {
     }
 	
 	// Create a job method
-	@PostMapping("/jobs/create")
-	public String createJob(@Valid @ModelAttribute("job") Job job, BindingResult result) {
+	@PostMapping("/thefamilyplanner/jobs/new")
+	public String createJob(@Valid @ModelAttribute("job") Job job, BindingResult result, Model model) {
         if (result.hasErrors()) {
+        	List<User> users = userServ.allUsers();
+	        model.addAttribute("users", users); 
             return "newJob.jsp";
         } else {
         	jobServ.createJob(job);
@@ -113,9 +115,13 @@ public class JobController {
     }
 	
 	// Update a job method
-	@RequestMapping(value="/jobs/{id}", method=RequestMethod.PUT)
-    public String update(@Valid @ModelAttribute("job") Job job, BindingResult result) {
-        if (result.hasErrors()) {
+	@RequestMapping(value="thefamilyplanner/jobs/{id}/edit", method=RequestMethod.PUT)
+    public String update(@Valid @ModelAttribute("job") Job job, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			List<User> users = userServ.allUsers();
+	        model.addAttribute("users", users);
+	        List<User> myUsers = userServ.getAssignedUsers(job);
+	        model.addAttribute("myUsers", myUsers); 
             return "editJob.jsp";
         } else {
         	jobServ.updateJob(job);
@@ -143,6 +149,7 @@ public class JobController {
 	@PostMapping("/jobs/comment")
 	public String createComment(@Valid @ModelAttribute("comment") Comment comment, BindingResult result) {
         if (result.hasErrors()) {
+        	
             return "commentJob.jsp";
         } else {
         	comServ.createComment(comment);

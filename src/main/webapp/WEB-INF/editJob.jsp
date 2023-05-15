@@ -23,7 +23,7 @@
 <body class="myfont bg-dark text-light">
 	<div class="pt-5 container-fluid">
 		<div class="d-flex align-items-center justify-content-between border-bottom border-light">
-			<h1 class="me-5">Edit, <c:out value="${job.name}"/></h1>
+			<h1 class="me-5">Edit Job</h1>
 			<div class="dropdown">
 				<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<div class="icon"></div>
@@ -42,10 +42,9 @@
 			</div>
 		</div>
 		<div class="mt-4 p-4 border-light rounded myshadow mx-auto border" style ="width:80%;">
-			<form:form action="/jobs/${job.id}" method="post" modelAttribute="job">
+			<form:form action="/thefamilyplanner/jobs/${job.id}/edit" method="post" modelAttribute="job">
 				<input type="hidden" name="_method" value="put">
 				<form:errors path="user" class="error"/>
-				<form:input type="hidden" path="user" value="${user.id}" class="form-control"/>
 				<div>
 					<form:label class="form-label fw-bold mt-2" path='name'>Name:</form:label>
 					<form:errors class="text-danger" path="name"/>
@@ -61,6 +60,7 @@
 					<form:errors class="text-danger" path="date"/>
 		    		<form:input class="form-control" path='date' type='date'/>
 				</div>
+				<form:errors path="users" class="text-danger" />
 				<div class="mt-3">
 				    <form:label class="fw-bold mt-2 form-label" path='users'>Assigned to:</form:label>
 				    <c:forEach var="user" items="${users}">
@@ -81,6 +81,7 @@
 				        <form:label path="users"><c:out value="${user.firstName}"/></form:label>
 				    </c:forEach>
 				</div>
+				<form:hidden path="user" value="${user.id}" class="form-control"/>
 	    		<input class="btn btn-outline-light me-3 rounded-5 myshadow mt-3" type="submit" value="Submit"/>	
 	 		</form:form>
 		</div>

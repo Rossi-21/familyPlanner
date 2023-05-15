@@ -23,7 +23,7 @@
 <body class="myfont bg-dark text-light">
 	<div class="pt-5 container-fluid">
 		<div class="d-flex align-items-center justify-content-between border-bottom border-light">
-			<h1 class="me-5">Edit, <c:out value="${event.name}"/></h1>
+			<h1 class="me-5">Edit Event</h1>
 			<div class="dropdown">
 				<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<div class="icon"></div>
@@ -42,7 +42,7 @@
 			</div>
 		</div>
 		<div class="mt-4 p-4 border-light rounded myshadow mx-auto border" style ="width:80%;">
-			<form:form action="/events/${event.id}" method="post" modelAttribute="event">
+			<form:form action="/thefamilyplanner/events/${event.id}/edit" method="post" modelAttribute="event">
 				<input type="hidden" name="_method" value="put">
 				<form:errors path="user" class="error"/>
 				<form:input type="hidden" path="user" value="${user.id}" class="form-control"/>
@@ -66,6 +66,7 @@
 					<form:errors class="text-danger" path="date"/>
 		    		<form:input class="form-control" path='date' type='date'/>
 				</div>
+				<form:errors path="users" class="text-danger" />
 				<div class="mt-3">
 				    <form:label class="fw-bold mt-2 form-label" path='users'>Assigned to:</form:label>
 				    <c:forEach var="user" items="${users}">

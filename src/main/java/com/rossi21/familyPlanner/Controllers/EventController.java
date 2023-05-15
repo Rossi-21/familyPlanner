@@ -70,9 +70,11 @@ public class EventController {
     }
 	
 	// Create a event method
-	@PostMapping("/events/create")
-	public String createEvent(@Valid @ModelAttribute("event") Event event, BindingResult result) {
+	@PostMapping("/thefamilyplanner/events/new")
+	public String createEvent(@Valid @ModelAttribute("event") Event event, BindingResult result, Model model) {
         if (result.hasErrors()) {
+        	List<User> users = userServ.allUsers();
+	        model.addAttribute("users", users);
             return "newEvent.jsp";
         } else {
         	eventServ.createEvent(event);
@@ -113,9 +115,13 @@ public class EventController {
     }
 	
 	// Update an event method
-	@RequestMapping(value="/events/{id}", method=RequestMethod.PUT)
-    public String update(@Valid @ModelAttribute("event") Event event, BindingResult result) {
+	@RequestMapping(value="/thefamilyplanner/events/{id}/edit", method=RequestMethod.PUT)
+    public String update(@Valid @ModelAttribute("event") Event event, BindingResult result, Model model) {
         if (result.hasErrors()) {
+        	List<User> users = userServ.allUsers();
+	        model.addAttribute("users", users);
+	        List<User> myUsers = userServ.getAssignedUsersEvent(event);
+	        model.addAttribute("myUsers", myUsers);
             return "editEvent.jsp";
         } else {
         	eventServ.updateEvent(event);

@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<div class="mt-4 p-4 border-light rounded myshadow mx-auto border" style ="width:80%;">	
-			<form:form action="/events/create" method="post" modelAttribute="event">
+			<form:form action="/thefamilyplanner/events/new" method="post" modelAttribute="event">
 					<form:errors path="user" class="error"/>
 					<form:input type="hidden" path="user" value="${user.id}" class="form-control"/>
 				<div>
@@ -64,6 +64,7 @@
 					<form:errors class="text-danger" path="date"/>
 					<form:input class="form-control" path='date' type='date'/>
 				</div>	
+				<form:errors path="users" class="text-danger" />
 				<div class="mt-3">
 					<form:label class="fw-bold mt-2 form-label" path='users'>Assigned to:</form:label>
 					<c:forEach var="user" items="${users}">

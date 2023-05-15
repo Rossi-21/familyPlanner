@@ -58,6 +58,7 @@ public class Job {
     @OneToMany(mappedBy="job", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
+    @NotEmpty(message = "At least one user must be selected!")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "jobs_users", 

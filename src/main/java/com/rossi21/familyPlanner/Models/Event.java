@@ -61,6 +61,7 @@ public class Event {
     @OneToMany(mappedBy="event", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CommentEvent> commentsEvent;
 
+    @NotEmpty(message = "At least one user must be selected!")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "events_users", 
